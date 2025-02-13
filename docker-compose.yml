@@ -8,6 +8,8 @@ services:
       - ./dagster_home:/opt/dagster/dagster_home
     environment:
       DAGSTER_HOME: /opt/dagster/dagster_home
+    depends_on:
+      - postgres
     command: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000"]
 
   dagster-daemon:
@@ -17,4 +19,22 @@ services:
       - ./dagster_home:/opt/dagster/dagster_home
     environment:
       DAGSTER_HOME: /opt/dagster/dagster_home
+    depends_on:
+      - postgres
     command: ["dagster-daemon", "run"]
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: dagster
+      POSTGRES_PASSWORD: dagster
+      POSTGRES_DB: dagster
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

@@ -1,17 +1,8 @@
-run_storage:
-  module: dagster._core.storage.runs
-  class: SqliteRunStorage
-  config:
-    base_dir: /opt/dagster/dagster_home
-
-event_log_storage:
-  module: dagster._core.storage.event_log
-  class: SqliteEventLogStorage
-  config:
-    base_dir: /opt/dagster/dagster_home
-
-schedule_storage:
-  module: dagster._core.storage.schedules
-  class: SqliteScheduleStorage
-  config:
-    base_dir: /opt/dagster/dagster_home
+storage:
+  postgres:
+    postgres_db:
+      username: dagster
+      password: dagster
+      hostname: postgres
+      db_name: dagster
+      port: 5432
