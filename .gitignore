@@ -1,0 +1,7 @@
+.vscode
+.vscode/*
+*.db
+dagster_home/storage/
+*.log
+*.DS_STORE
+*.pyc
